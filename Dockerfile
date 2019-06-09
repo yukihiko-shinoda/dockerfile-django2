@@ -1,4 +1,4 @@
-FROM amazonlinux:2.0.20190228
+FROM amazonlinux:2.0.20190508
 WORKDIR /app
 # ↓dependency on Pyenv, wait-for-it
 RUN yum install -y git
@@ -11,12 +11,13 @@ RUN yum install -y libffi-devel
 ENV PYENV_ROOT /opt/pyenv
 ENV PATH $PYENV_ROOT/bin:$PATH
 RUN eval "$(pyenv init -)"
-RUN pyenv install 3.7.1
-RUN pyenv global 3.7.1
+RUN pyenv install 3.7.3
+RUN pyenv global 3.7.3
 ENV PATH $PYENV_ROOT/shims:$PATH
 # ↓dependency on Pipenv
 RUN yum install -y which
 RUN pip install pipenv
+ENV LANG ja_JP.UTF-8
 # ↓ @see http://docs.docker.jp/compose/startup-order.html
 RUN git clone https://github.com/vishnubob/wait-for-it.git /usr/bin/wait-for-it
 # ↓ install Node.js
